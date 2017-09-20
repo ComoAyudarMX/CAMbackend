@@ -6,9 +6,12 @@ exports.cn = function (app, opts) {
     var property = opts.property || "db";
     var connection;
 
+    var isProduction = process.env.NODE_ENV == "production" || process.env.NODE_ENV == "staging";
+    var mongoconnection = isProduction ? : process.env.MongoConnection : config.db_uri;
+
     return function MongoDb(req, res, next) {
         if (!connection) {
-            connection = client.connect(config.db_uri, opts);
+            connection = client.connect(mongoconnection, opts);
         }
         connection
             .then(function (db) {
