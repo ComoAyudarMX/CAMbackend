@@ -1,8 +1,6 @@
 var mongodb = require("mongodb");
 const config = require("../config/settings.js");
 
-var client = mongodb.MongoClient;
-
 exports.cn = function (app, opts) {
     opts = opts || {};
     var property = opts.property || "db";
