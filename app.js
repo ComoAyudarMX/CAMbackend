@@ -4,6 +4,7 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var connection = require("./mongodb/connection");
 
 var index = require('./routes/index');
 var users = require('./routes/users');
@@ -21,6 +22,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(connection.cn(app, {}));
 
 app.use('/', index);
 app.use('/users', users);
