@@ -10,8 +10,11 @@ var connection = require("./mongodb/connection");
 
 var index = require('./routes/index');
 var users = require('./routes/users');
+var eventController = require("./routes/eventController");
 
 var app = express();
+
+const apiVersion = "/api/v1";
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -30,6 +33,8 @@ app.use(connection.cn(app, {}));
 
 app.use('/', index);
 app.use('/users', users);
+app.use(apiVersion + "/event", eventController);
+
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
